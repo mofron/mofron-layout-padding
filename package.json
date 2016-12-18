@@ -1,0 +1,22 @@
+{
+  "name": "mofron-layout-padding",
+  "version": "0.0.1",
+  "description": "padding layout of mofron",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simpart/mofron-layout-padding.git"
+  },
+  "keywords": [
+    "mofron"
+  ],
+  "author": "simpart",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/simpart/mofron-layout-padding/issues"
+  },
+  "homepage": "https://github.com/simpart/mofron-layout-padding#readme"
+}
