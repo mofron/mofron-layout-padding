@@ -1,6 +1,6 @@
 {
   "name": "mofron-layout-padding",
-  "version": "0.0.1",
+  "version": "0.0.5",
   "description": "padding layout of mofron",
   "main": "index.js",
   "scripts": {
@@ -18,5 +18,7 @@
   "bugs": {
     "url": "https://github.com/simpart/mofron-layout-padding/issues"
   },
-  "homepage": "https://github.com/simpart/mofron-layout-padding#readme"
+  "homepage": "https://github.com/simpart/mofron-layout-padding#readme",
+  "devDependencies": {
+  }
 }
