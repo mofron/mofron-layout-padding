@@ -12,21 +12,17 @@ mofron.layout.Padding = class extends mofron.Layout {
     constructor (tp,val) {
         try {
             super();
-            var _tp  = (undefined === tp)  ? null : tp;
-            var _val = (undefined === val) ? null : val;
-
-            if (null === _tp) {
-                throw new Error('invalid paramter');
-            } else if ('number' === (typeof _tp)) {
-                _val = _tp;
-                _tp  = '';
-            }
-
+            this.name('Padding');
+            
             this.m_type  = null;
             this.m_value = null;
-
-            this.type(_tp);
-            this.value(_val);
+            
+            if ('object' === typeof tp) {
+                this.prmOpt(tp);
+            } else {
+                this.type(tp);
+                this.value(val);
+            }
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -49,8 +45,10 @@ mofron.layout.Padding = class extends mofron.Layout {
     type (tp) {
         try {
             if (undefined === tp) {
+                /* getter */
                 return this.m_type;
             }
+            /* setter */
             if ( ('string' != (typeof tp)) ||
                  ( (''       != tp) &&
                    ('top'    != tp) &&
@@ -69,10 +67,12 @@ mofron.layout.Padding = class extends mofron.Layout {
     value (val) {
         try {
             if (undefined === val) {
+                /* getter */
                 return this.m_value;
             }
-
-            if ((null === val) || ('number' !== (typeof val))) {
+            /* setter */
+            if ( (null === val) ||
+                 ('number' !== (typeof val)) ) {
                 throw new Error('invalid parameter');
             }
             this.m_value = val;
@@ -82,3 +82,4 @@ mofron.layout.Padding = class extends mofron.Layout {
         }
     }
 }
+module.exports = mofron.layout.Padding;
