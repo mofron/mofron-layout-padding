@@ -9,73 +9,65 @@
  */
 mofron.layout.Padding = class extends mofron.Layout {
 
-    constructor (tp,val) {
+    constructor (tp,val,mlt) {
         try {
             super();
             this.name('Padding');
+            this.prmOpt(tp, val, mlt);
+            this.getParam().check(
+                (t) => {
+                    try {
+                        if ( ('string' != (typeof t)) ||
+                             ( ('top'    != t) &&
+                               ('right'  != t) &&
+                               ('bottom' != t) &&
+                               ('left'   != t) ) ) {
+                            throw new Error('invalid parameter');
+                        }
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                },
+                (v) => {
+                    try {
+                        if ('string' !== (typeof v) && ('number' !== typeof v)) {
+                            throw new Error('invalid parameter');
+                        }
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                },
+                (m) => {
+                    try {
+                        if (undefined === m) {
+                            return false;
+                        }
+                        if ('boolean' !== (typeof m)) {
+                            throw new Error('invalid parameter');
+                        }
+                    } catch (e) {
+                        console.error(e.stack);
+                        throw e;
+                    }
+                }
+            );
             
-            this.m_type  = null;
-            this.m_value = null;
-            
-            if ('object' === typeof tp) {
-                this.prmOpt(tp);
-            } else {
-                this.type(tp);
-                this.value(val);
-            }
         } catch (e) {
             console.error(e.stack);
             throw e;
         }
     }
     
-    layoutConts (idx, tgt) {
+    contents (idx, tgt) {
         try {
-            var pd = 'padding';
-            if (null !== this.type()) {
-                pd += '-' + this.type();
-            }
-            tgt.vdom().style(pd, this.value() + 'px');
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-    
-    type (tp) {
-        try {
-            if (undefined === tp) {
-                /* getter */
-                return this.m_type;
-            }
-            /* setter */
-            if ( ('string' != (typeof tp)) ||
-                 ( (''       != tp) &&
-                   ('top'    != tp) &&
-                   ('right'  != tp) &&
-                   ('bottom' != tp) &&
-                   ('left'   != tp) ) ) {
-                throw new Error('invalid parameter');
-            }
-            this.m_type = tp;
-        } catch (e) {
-            console.error(e.stack);
-            throw e;
-        }
-    }
-
-    value (val) {
-        try {
-            if (undefined === val) {
-                /* getter */
-                return this.m_value;
-            }
-            /* setter */
-            if ( (null === val) ||
-                 ('number' !== (typeof val)) ) {
-                throw new Error('invalid parameter');
-            }
-            this.m_value = val;
+            let type   = this.value()[0];
+            let px_val = this.value()[1];
+            let pd     = (null === type) ? 'padding' : 'padding-' + type;
+            let style  = {};
+            style[pd]  = px_val + 'px';
+            tgt.adom().style(style);
         } catch (e) {
             console.error(e.stack);
             throw e;
@@ -83,3 +75,4 @@ mofron.layout.Padding = class extends mofron.Layout {
     }
 }
 module.exports = mofron.layout.Padding;
+/* end of file */
